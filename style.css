@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #2f80ed, #2fd9a6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 380px;
+    padding: 20px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(250, 250, 250, 0.2);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.logo img {
+    width: 50px;
+}
+
+h2 {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0 12px;
+    border-radius: 10px;
+    border: 1px solid #f8f6f6;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #2fd9a6, #27ae60);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.role-box {
+    margin-top: 15px;
+}
+
+.role-title {
+    text-align: center;
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.roles label {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.roles input {
+    display: none;
+}
+
+.roles input:checked+span {
+    background: #2fd9a6;
+    color: white;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+}
