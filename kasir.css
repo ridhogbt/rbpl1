@@ -2,60 +2,292 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #2f80ed, #2fd9a6);
-    min-height: 100vh;
+    background-color: #2b2b2b;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
+    min-height: 100vh;
 }
 
 .app {
     width: 100%;
-    max-width: 420px;
-    margin-top: 40px;
+    max-width: 400px;
+    background: #f4f7f6;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    padding-bottom: 30px;
 }
 
+/* --- Header --- */
 .header {
+    background: #10b981;
+    color: white;
+    padding: 20px 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    background-color: rgb(74, 213, 85);
+    justify-content: space-between;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    margin-bottom: 15px;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.header-title span {
+    font-size: 12px;
+    font-weight: normal;
+    opacity: 0.9;
+    display: block;
+}
+
+.header a.balek {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.btn-outline {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+/* --- Content & Cards --- */
+.content {
+    padding: 0 15px;
 }
 
 .card {
-    margin-top: 20px;
     background: white;
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 16px;
     margin-bottom: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    border: 1px solid #eef0f2;
 }
 
-.menu {
+.card-title {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.card-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background: #10b981;
+    margin-right: 8px;
+    border-radius: 4px;
+}
+
+/* --- Alerts --- */
+.alert-success {
+    background: #ecfdf5;
+    color: #065f46;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #a7f3d0;
+    font-size: 13px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- Forms & Buttons --- */
+label {
     display: block;
-    background: #2f80ed;
-    color: rgb(13, 7, 7);
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 10px;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dde2e5;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    outline: none;
+    background: #fafbfc;
+}
+
+input:focus {
+    border-color: #10b981;
+}
+
+button.btn,
+a.btn {
+    display: block;
+    width: 100%;
     text-align: center;
-}
-
-.menu:hover {
-    background: #1c5ed6;
-}
-
-.logout {
+    background: #10b981;
     color: white;
+    padding: 14px;
+    border-radius: 8px;
     text-decoration: none;
-    background: #e74c3c;
-    padding: 6px 10px;
-    border-radius: 5px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* --- Menu Item (Dashboard) --- */
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #e2e8f0;
+    gap: 15px;
+}
+
+.menu-item .icon {
+    background: #10b981;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.menu-item div b {
+    font-size: 14px;
+}
+
+.menu-item div p {
+    font-size: 11px;
+    color: #777;
+    margin-top: 3px;
+}
+
+/* --- Table / System Info --- */
+.sys-info {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.sys-info th {
+    text-align: left;
+    padding: 8px 0;
+    color: #777;
+    font-weight: normal;
+    border-bottom: 1px solid #eee;
+}
+
+.sys-info td {
+    text-align: right;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-weight: 500;
+}
+
+.badge {
+    background: #10b981;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+}
+
+/* --- Keranjang Items --- */
+.item-list {
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.item-info b {
+    color: #333;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.item-info span {
+    color: #777;
+    font-size: 11px;
+}
+
+.item-price {
+    color: #10b981;
+    font-weight: bold;
+    text-align: right;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.total-row .price {
+    color: #10b981;
+    font-size: 16px;
+}
+
+/* --- Struk Print --- */
+.struk-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.struk-header h4 {
+    color: #1e40af;
+    margin-bottom: 2px;
+}
+
+.struk-header p {
+    font-size: 11px;
+    color: #777;
+}
+
+.struk-table {
+    width: 100%;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.struk-table td {
+    padding: 4px 0;
+}
+
+.struk-table td:last-child {
+    text-align: right;
+}
+
+.dash-line {
+    border-top: 1px dashed #ccc;
+    margin: 10px 0;
 }

@@ -19,6 +19,7 @@ if (isset($_POST['tambah'])) {
             "jumlah" => $jumlah
         ];
         header("Location: keranjang.php");
+        exit;
     }
 }
 ?>
@@ -27,32 +28,31 @@ if (isset($_POST['tambah'])) {
 
 <head>
     <title>Transaksi</title>
-    <link rel="stylesheet" href="kasir.css">
+    <link rel="stylesheet" href="kasir.css?v=2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
     <div class="app">
-        <div class="card">
-
-            <div class="header">
-                <a href="dashboard_kasir.php" class="balek">←Dashboard</a>
-                <b>Transaksi</b>
+        <div class="header">
+            <div class="header-title">
+                <a href="dashboard_kasir.php" class="balek">←</a>
+                🛒 Transaksi Penjualan
             </div>
+        </div>
 
-            <div class="content">
+        <div class="content">
+            <div class="card">
+                <div class="card-title">Input Obat</div>
+                <form method="post">
+                    <label>Kode/Nama Obat</label>
+                    <input type="text" name="kode" placeholder="OBT001 atau Paracetamol" required>
 
-                <div class="card">
-                    <form method="post">
-                        <label>Kode / Nama Obat</label>
-                        <input type="text" name="kode" required>
+                    <label>Jumlah</label>
+                    <input type="number" name="jumlah" placeholder="0" required>
 
-                        <label>Jumlah</label>
-                        <input type="number" name="jumlah" required>
-
-                        <button class="btn" name="tambah">Tambah ke Keranjang</button>
-                    </form>
-                </div>
-
+                    <button class="btn" name="tambah">+ Tambah ke Keranjang</button>
+                </form>
             </div>
         </div>
     </div>

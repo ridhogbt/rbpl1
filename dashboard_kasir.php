@@ -9,38 +9,60 @@ if ($_SESSION['role'] != "kasir") {
 
 <head>
     <title>Dashboard Kasir</title>
-    <link rel="stylesheet" href="kasir.css">
+    <link rel="stylesheet" href="kasir.css?v=2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <div class="app" >
-        <div class="card" id="card-kasir">
+    <div class="app">
+        <div class="header">
+            <div class="header-title">
+                🏠
+                <div>
+                    Dashboard Kasir
+                    <span>Sistem Manajemen Apotek</span>
+                </div>
+            </div>
+            <a href="logout.php" class="btn-outline">Keluar</a>
+        </div>
 
-            <div class="header" >
-
-                <span class="title" style="color: black;">Dashboard Kasir</span>
-                <a href="logout.php" class="logout">Logout</a>
+        <div class="content">
+            <div class="alert-success">
+                ✔️ Login Berhasil! Selamat datang, Anda login sebagai Kasir.
             </div>
 
-            
+            <div class="card">
+                <div class="card-title">Menu Utama</div>
+                <a href="transaksi.php" class="menu-item">
+                    <div class="icon">🛒</div>
+                    <div>
+                        <b>Transaksi Penjualan</b>
+                        <p>Proses penjualan obat</p>
+                    </div>
+                </a>
+            </div>
 
-                <div class="card">
-                    Login berhasil! Selamat datang <b><?= $_SESSION['user']; ?></b>
-                </div>
-
-                <div class="card">
-                    <h4>Menu</h4>
-                    <a href="transaksi.php" class="btn">Transaksi Penjualan</a>
-                </div>
-
-                <div class="card">
-                    <p>Role: <b>Kasir</b></p>
-                    <p>Status: Aktif</p>
-                    <p>Waktu Login: <?= date("H:i:s"); ?></p>
-                </div>
-
-            
+            <div class="card">
+                <div class="card-title">Informasi Sistem</div>
+                <table class="sys-info">
+                    <tr>
+                        <th>Parameter</th>
+                        <th style="text-align: right;">Nilai</th>
+                    </tr>
+                    <tr>
+                        <td>Role Pengguna</td>
+                        <td><span class="badge">Kasir</span></td>
+                    </tr>
+                    <tr>
+                        <td>Status Login</td>
+                        <td><span style="color: #10b981; font-size: 18px;">●</span> Aktif</td>
+                    </tr>
+                    <tr>
+                        <td>Waktu Login</td>
+                        <td><?= date("H:i:s"); ?></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>
