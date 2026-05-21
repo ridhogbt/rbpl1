@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['role'] != "apoteker") {
+if ($_SESSION['role'] != "teknisi") {
     header("Location: login.php");
     exit;
 }
@@ -9,8 +9,8 @@ if ($_SESSION['role'] != "apoteker") {
 <html>
 
 <head>
-    <title>Dashboard Apoteker</title>
-    <link rel="stylesheet" href="apoteker.css?v=1">
+    <title>Dashboard Teknisi</title>
+    <link rel="stylesheet" href="teknisi.css?v=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -20,7 +20,7 @@ if ($_SESSION['role'] != "apoteker") {
             <div class="header-title">
                 🏠
                 <div>
-                    Dashboard Apoteker
+                    Dashboard Teknisi
                     <span>Sistem Manajemen Apotek</span>
                 </div>
             </div>
@@ -29,16 +29,16 @@ if ($_SESSION['role'] != "apoteker") {
 
         <div class="content">
             <div class="alert-success">
-                ✔️ Login Berhasil! Selamat datang, Anda login sebagai Apoteker.
+                ✔️ Login Berhasil! Selamat datang, Anda login sebagai Teknisi.
             </div>
 
             <div class="card">
                 <div class="card-title">Menu Utama</div>
-                <a href="inventaris.php" class="menu-item" style="margin-bottom:0;">
-                    <div class="icon">📦</div>
+                <a href="laporan.php" class="menu-item" style="margin-bottom:0;">
+                    <div class="icon">⚙️</div>
                     <div>
-                        <b>Manajemen Inventaris</b>
-                        <p>Kelola data obat & Resep</p>
+                        <b>Laporan Gangguan</b>
+                        <p>Kelola laporan pengguna</p>
                     </div>
                 </a>
             </div>
@@ -52,7 +52,7 @@ if ($_SESSION['role'] != "apoteker") {
                     </tr>
                     <tr>
                         <td>Role Pengguna</td>
-                        <td><span class="badge">Apoteker</span></td>
+                        <td><span class="badge-red" style="padding:4px 10px;">Teknisi</span></td>
                     </tr>
                     <tr>
                         <td>Status Login</td>

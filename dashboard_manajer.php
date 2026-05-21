@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['role'] != "apoteker") {
+if ($_SESSION['role'] != "manajer") {
     header("Location: login.php");
     exit;
 }
@@ -9,8 +9,8 @@ if ($_SESSION['role'] != "apoteker") {
 <html>
 
 <head>
-    <title>Dashboard Apoteker</title>
-    <link rel="stylesheet" href="apoteker.css?v=1">
+    <title>Dashboard Manajer</title>
+    <link rel="stylesheet" href="manajer.css?v=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -20,7 +20,7 @@ if ($_SESSION['role'] != "apoteker") {
             <div class="header-title">
                 🏠
                 <div>
-                    Dashboard Apoteker
+                    Dashboard Manajer
                     <span>Sistem Manajemen Apotek</span>
                 </div>
             </div>
@@ -29,16 +29,25 @@ if ($_SESSION['role'] != "apoteker") {
 
         <div class="content">
             <div class="alert-success">
-                ✔️ Login Berhasil! Selamat datang, Anda login sebagai Apoteker.
+                ✔️ Login Berhasil! Selamat datang, Anda login sebagai Manajer.
             </div>
 
             <div class="card">
                 <div class="card-title">Menu Utama</div>
-                <a href="inventaris.php" class="menu-item" style="margin-bottom:0;">
-                    <div class="icon">📦</div>
-                    <div>
-                        <b>Manajemen Inventaris</b>
-                        <p>Kelola data obat & Resep</p>
+                <a href="laporan_analisis.php" class="menu-item">
+                    <div class="icon">📊</div>
+                    <div><b>Laporan & Analisis</b>
+                        <p>Lihat laporan penjualan</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Daftar Pengguna Baru</div>
+                <a href="daftar_pengguna.php" class="menu-item" style="margin-bottom:0;">
+                    <div class="icon">👥</div>
+                    <div><b>Daftar</b>
+                        <p>Daftar Pengguna</p>
                     </div>
                 </a>
             </div>
@@ -52,7 +61,7 @@ if ($_SESSION['role'] != "apoteker") {
                     </tr>
                     <tr>
                         <td>Role Pengguna</td>
-                        <td><span class="badge">Apoteker</span></td>
+                        <td><span class="badge">Manajer</span></td>
                     </tr>
                     <tr>
                         <td>Status Login</td>
