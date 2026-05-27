@@ -3,6 +3,7 @@ session_start();
 include "koneksi.php";
 
 $sukses = false;
+$pesan_error = ""; // Variabel penampung jika terjadi error database
 
 if (isset($_POST['simpan'])) {
     $kode = $_POST['kode'];
@@ -12,10 +13,16 @@ if (isset($_POST['simpan'])) {
     $supplier = $_POST['supplier'];
     $harga = $_POST['harga'];
 
-    $query = mysqli_query($conn, "INSERT INTO obat (kode_obat,nama_obat,stok,expired,supplier,harga) VALUES ('$kode','$nama','$stok','$exp','$supplier','$harga')");
+    // Menggunakan try-catch untuk menangkap error (menghindari HTTP Error 500)
+    try {
+        $query = mysqli_query($conn, "INSERT INTO obat (kode_obat,nama_obat,stok,expired,supplier,harga) VALUES ('$kode','$nama','$stok','$exp','$supplier','$harga')");
 
-    if ($query) {
-        $sukses = true;
+        if ($query) {
+            $sukses = true;
+        }
+    } catch (mysqli_sql_exception $e) {
+        // Jika gagal, sistem tidak akan crash, melainkan pesan error ini akan muncul
+        $pesan_error = $e->getMessage();
     }
 }
 ?>
@@ -38,6 +45,13 @@ if (isset($_POST['simpan'])) {
         </div>
 
         <div class="content">
+
+            <?php if ($pesan_error != ""): ?>
+                <div class="alert-danger" style="background: #fef2f2; color: #b91c1c; padding: 12px; border-radius: 8px; border: 1px solid #fecaca; margin-bottom: 15px;">
+                    ❗ <b>Gagal Menyimpan Data:</b><br><span style="font-size:11px;"><?= $pesan_error ?></span>
+                </div>
+            <?php endif; ?>
+
             <?php if ($sukses): ?>
                 <div class="alert-success">
                     ✔️ <b>Data Berhasil Disimpan</b><br>

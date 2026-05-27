@@ -44,7 +44,7 @@ if ($_SESSION['role'] != "manajer") {
 
             <div class="card">
                 <div class="card-title">Daftar Pengguna Baru</div>
-                <a href="daftar_pengguna.php" class="menu-item" style="margin-bottom:0;">
+                <a href="kelola_pengguna.php" class="menu-item" style="margin-bottom:0;">
                     <div class="icon">👥</div>
                     <div><b>Daftar</b>
                         <p>Daftar Pengguna</p>
