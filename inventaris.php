@@ -7,30 +7,40 @@ if ($_SESSION['role'] != "apoteker") {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Manajemen Inventaris</title>
-    <link rel="stylesheet" href="apoteker.css?v=1">
+    <link rel="stylesheet" href="apoteker.css?v=2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <div class="app">
         <div class="header">
             <div class="header-title">
-                <a href="dashboard_apoteker.php" class="balek">←</a> 
+                <a href="dashboard_apoteker.php" class="balek">←</a>
                 📦 Manajemen Inventaris
             </div>
         </div>
 
         <div class="content">
             <div class="alert-info">
-                ℹ️ Pilih jenis data yang ingin diinputkan ke dalam sistem inventaris
+                ℹ️ Pilih jenis menu di bawah ini untuk mengelola data inventaris apotek.
             </div>
+
+            <a href="daftar_obat.php" class="menu-item">
+                <div class="icon">🔍</div>
+                <div>
+                    <b>Daftar & Cari Obat</b>
+                    <p>Lihat, cari, dan hapus data stok obat</p>
+                </div>
+            </a>
 
             <a href="input_obat.php" class="menu-item">
                 <div class="icon">💊</div>
                 <div>
                     <b>Input Data Obat</b>
-                    <p>Tambah stok obat ke inventaris</p>
+                    <p>Tambah stok obat baru ke inventaris</p>
                 </div>
             </a>
 
@@ -44,4 +54,5 @@ if ($_SESSION['role'] != "apoteker") {
         </div>
     </div>
 </body>
+
 </html>

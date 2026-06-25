@@ -1,16 +1,27 @@
 <?php
 session_start();
+include "koneksi.php"; // Pastikan koneksi database dipanggil
 if ($_SESSION['role'] != "apoteker") {
     header("Location: login.php");
     exit;
 }
+
+// Cek Stok Minimum (Kurang dari 10)
+$q_stok = mysqli_query($conn, "SELECT COUNT(*) as jumlah FROM obat WHERE stok < 10");
+$d_stok = mysqli_fetch_assoc($q_stok);
+$stok_menipis = $d_stok['jumlah'];
+
+// Cek Obat Kadaluarsa (Dalam 30 hari ke depan)
+$q_exp = mysqli_query($conn, "SELECT COUNT(*) as jumlah FROM obat WHERE expired <= DATE_ADD(CURDATE(), INTERVAL 30 DAY)");
+$d_exp = mysqli_fetch_assoc($q_exp);
+$obat_exp = $d_exp['jumlah'];
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Dashboard Apoteker</title>
-    <link rel="stylesheet" href="apoteker.css?v=1">
+    <link rel="stylesheet" href="apoteker.css?v=2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -28,9 +39,21 @@ if ($_SESSION['role'] != "apoteker") {
         </div>
 
         <div class="content">
-            <div class="alert-success">
-                ✔️ Login Berhasil! Selamat datang, Anda login sebagai Apoteker.
+            <div class="alert-success" style="margin-bottom: 10px;">
+                ✔️ Login Berhasil! Selamat datang, <?= htmlspecialchars($_SESSION['user']) ?>.
             </div>
+
+            <?php if ($stok_menipis > 0): ?>
+                <div style="background:#fffbeb; color:#b45309; padding:12px; border-radius:8px; border:1px solid #fde68a; font-size:12px; margin-bottom:10px;">
+                    ⚠️ <b>Peringatan Stok:</b> Terdapat <b><?= $stok_menipis ?> jenis obat</b> yang stoknya menipis (kurang dari 10).
+                </div>
+            <?php endif; ?>
+
+            <?php if ($obat_exp > 0): ?>
+                <div style="background:#fef2f2; color:#b91c1c; padding:12px; border-radius:8px; border:1px solid #fecaca; font-size:12px; margin-bottom:15px;">
+                    ❗ <b>Peringatan Expired:</b> Terdapat <b><?= $obat_exp ?> jenis obat</b> yang sudah kadaluarsa atau akan kadaluarsa dalam 30 hari!
+                </div>
+            <?php endif; ?>
 
             <div class="card">
                 <div class="card-title">Menu Utama</div>

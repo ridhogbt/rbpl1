@@ -3,7 +3,7 @@ session_start();
 include "koneksi.php";
 
 $sukses = false;
-$pesan_error = ""; // Variabel penampung jika terjadi error database
+$pesan_error = "";
 
 if (isset($_POST['simpan'])) {
     $kode = $_POST['kode'];
@@ -13,16 +13,19 @@ if (isset($_POST['simpan'])) {
     $supplier = $_POST['supplier'];
     $harga = $_POST['harga'];
 
-    // Menggunakan try-catch untuk menangkap error (menghindari HTTP Error 500)
-    try {
-        $query = mysqli_query($conn, "INSERT INTO obat (kode_obat,nama_obat,stok,expired,supplier,harga) VALUES ('$kode','$nama','$stok','$exp','$supplier','$harga')");
-
-        if ($query) {
-            $sukses = true;
+    // VALIDASI: Tanggal kadaluarsa harus lebih dari hari ini
+    $hari_ini = date('Y-m-d');
+    if ($exp <= $hari_ini) {
+        $pesan_error = "Obat sudah kadaluarsa atau mendekati batas aman hari ini. Tidak dapat disimpan.";
+    } else {
+        try {
+            $query = mysqli_query($conn, "INSERT INTO obat (kode_obat,nama_obat,stok,expired,supplier,harga) VALUES ('$kode','$nama','$stok','$exp','$supplier','$harga')");
+            if ($query) {
+                $sukses = true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            $pesan_error = $e->getMessage();
         }
-    } catch (mysqli_sql_exception $e) {
-        // Jika gagal, sistem tidak akan crash, melainkan pesan error ini akan muncul
-        $pesan_error = $e->getMessage();
     }
 }
 ?>
