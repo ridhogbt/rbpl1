@@ -1,0 +1,261 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Waktu pembuatan: 27 Bulan Mei 2026 pada 18.48
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `rbpl_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `detail_transaksi`
+--
+
+CREATE TABLE `detail_transaksi` (
+  `id` int(11) NOT NULL,
+  `kode_transaksi` varchar(50) NOT NULL,
+  `nama_obat` varchar(100) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `harga_satuan` int(11) NOT NULL,
+  `subtotal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`id`, `kode_transaksi`, `nama_obat`, `jumlah`, `harga_satuan`, `subtotal`) VALUES
+(3, 'TRX2026052717512140', 'Paracetamol', 1, 5000, 5000),
+(4, 'TRX2026052717520385', 'Paracetamol', 1, 5000, 5000),
+(5, 'TRX2026052718132989', 'Paracetamol', 1, 5000, 5000);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `laporan_gangguan`
+--
+
+CREATE TABLE `laporan_gangguan` (
+  `id` int(11) NOT NULL,
+  `id_laporan` varchar(20) NOT NULL,
+  `judul` varchar(150) NOT NULL,
+  `kategori` varchar(100) NOT NULL,
+  `prioritas` varchar(20) NOT NULL,
+  `pelapor` varchar(100) NOT NULL,
+  `tanggal` datetime NOT NULL,
+  `deskripsi` text NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'Baru',
+  `catatan_perbaikan` text DEFAULT NULL,
+  `waktu_selesai` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `laporan_gangguan`
+--
+
+INSERT INTO `laporan_gangguan` (`id`, `id_laporan`, `judul`, `kategori`, `prioritas`, `pelapor`, `tanggal`, `deskripsi`, `status`, `catatan_perbaikan`, `waktu_selesai`) VALUES
+(1, 'RLG001', 'Aplikasi tidak bisa login', 'Akses & Keamanan', 'Tinggi', 'Ahmad Fauzi', '2024-12-14 09:30:00', 'Sistem menampilkan pesan error saat mencoba login dengan kredensial yang benar.', 'Baru', NULL, NULL),
+(2, 'RLG002', 'Printer struk tidak bekerja', 'Perangkat Keras', 'Sedang', 'Siti Nurhaliza', '2024-12-14 10:15:00', 'Printer tidak merespon perintah cetak dari kasir 1.', 'Baru', NULL, NULL),
+(3, 'RLG003', 'Data stok tidak sinkron', 'Database', 'Tinggi', 'Budi Santoso', '2024-12-14 10:45:00', 'Perbedaan jumlah stok antara sistem dan fisik di gudang.', 'Selesai', 'sudah saya perbaiki', '2026-05-21 21:06:40');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `obat`
+--
+
+CREATE TABLE `obat` (
+  `id` int(11) NOT NULL,
+  `kode_obat` varchar(20) NOT NULL,
+  `nama_obat` varchar(100) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `stok` int(11) NOT NULL,
+  `expired` date DEFAULT NULL,
+  `supplier` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `obat`
+--
+
+INSERT INTO `obat` (`id`, `kode_obat`, `nama_obat`, `harga`, `stok`, `expired`, `supplier`) VALUES
+(4, 'OBT003', 'intunal', 6000, 20, '2026-06-06', 'PT. kimia farma'),
+(5, 'OBT001', 'Paracetamol', 5000, 0, '2026-06-06', 'PT. kimia farma');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `resep`
+--
+
+CREATE TABLE `resep` (
+  `id` int(11) NOT NULL,
+  `no_resep` varchar(20) DEFAULT NULL,
+  `nama_pasien` varchar(100) DEFAULT NULL,
+  `nama_obat` varchar(100) DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `nama_dokter` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `resep`
+--
+
+INSERT INTO `resep` (`id`, `no_resep`, `nama_pasien`, `nama_obat`, `jumlah`, `tanggal`, `nama_dokter`) VALUES
+(1, 'full12', 'dika', 'Paracetamol', 1, '2026-05-28', 'Dr. ridho');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `id` int(11) NOT NULL,
+  `kode_transaksi` varchar(50) NOT NULL,
+  `tanggal` datetime NOT NULL,
+  `total_harga` int(11) NOT NULL,
+  `nominal_bayar` int(11) NOT NULL,
+  `kembalian` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `transaksi`
+--
+
+INSERT INTO `transaksi` (`id`, `kode_transaksi`, `tanggal`, `total_harga`, `nominal_bayar`, `kembalian`) VALUES
+(1, 'TRX2026052717504611', '2026-05-27 17:50:46', 500505000, 50055000, -450450000),
+(2, 'TRX2026052717512140', '2026-05-27 17:51:21', 5000, 5000, 0),
+(3, 'TRX2026052717520385', '2026-05-27 17:52:03', 5000, 6000, 1000),
+(4, 'TRX2026052718132989', '2026-05-27 18:13:29', 5000, 5000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `nama` varchar(100) DEFAULT NULL,
+  `role` varchar(20) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `domisili` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `nama`, `role`, `tanggal_lahir`, `domisili`) VALUES
+(1, 'kasir1', '12345', NULL, 'kasir', NULL, NULL),
+(2, 'admin1', 'admin123', NULL, 'admin', NULL, NULL),
+(11, 'kasir', '123', NULL, 'kasir', NULL, NULL),
+(12, 'apoteker', '123', NULL, 'apoteker', NULL, NULL),
+(13, 'manajer', '123', NULL, 'manajer', NULL, NULL),
+(14, 'teknisi', '123', NULL, 'teknisi', NULL, NULL),
+(15, 'QTU21', '12345', 'ridho', 'apoteker', '2006-05-05', 'sleman');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `laporan_gangguan`
+--
+ALTER TABLE `laporan_gangguan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `obat`
+--
+ALTER TABLE `obat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `resep`
+--
+ALTER TABLE `resep`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `laporan_gangguan`
+--
+ALTER TABLE `laporan_gangguan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `obat`
+--
+ALTER TABLE `obat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `resep`
+--
+ALTER TABLE `resep`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
